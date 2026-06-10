@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>
+Carbon Tracker Dashboard
+</h1>
+
+<h3>
+Welcome {{ current_user.name }}
+</h3>
+
+<a href="/logout">
+Logout
+</a>
+
+<hr>
+
+<h2>
+Add Carbon Data
+</h2>
+
+<form action="/calculate" method="POST">
+
+<input
+type="number"
+step="0.01"
+name="electricity"
+placeholder="Electricity Usage"
+required>
+
+<input
+type="number"
+step="0.01"
+name="vehicle"
+placeholder="Vehicle KM"
+required>
+
+<input
+type="number"
+step="0.01"
+name="flights"
+placeholder="Number of Flights"
+required>
+
+<button type="submit">
+Calculate
+</button>
+
+</form>
+
+<hr>
+
+<h2>
+Total Carbon Emission
+</h2>
+
+<h1>
+{{ total_emission }} kg CO₂
+</h1>
+
+<hr>
+
+<h2>
+History
+</h2>
+
+<table>
+
+<tr>
+<th>Date</th>
+<th>Total</th>
+</tr>
+
+{% for record in records %}
+
+<tr>
+<td>{{ record.date }}</td>
+<td>{{ record.total }}</td>
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>
